@@ -1,8 +1,33 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+//apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = "testLib"        //name as in bintray repo
+    bintrayName = "com.genius.testlib"  //package name as in bintray repo
+
+    libraryName = "testlib2"     //name of module in android project
+
+    //implementation "com.genius.testlib:testlib:0.0.1"
+    publishedGroupId = "com.genius.testlib"
+    artifact = "testlib"
+    libraryVersion = "0.0.1"
+
+    libraryDescription = "Simple Utils library"
+    siteUrl = "https://github.com/Thulasi-coder/TestLib"
+    gitUrl = "https://github.com/Thulasi-coder/TestLib.git"
+    developerId = "thulasi-coder"
+    developerName = "Thulasi Rajan"
+    developerEmail = "rajanthulasi7@gmail.com"
+    licenseName = "The Apache Software License , Version 2.0"
+    licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    allLicenses = ["Apache-2.0"]
+    
+}
 
 android {
     compileSdkVersion 29
@@ -32,4 +57,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
+
+//readymade scripts to upload files to bintray
+//always place at end of file
+if(project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/Jcenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/Jcenter/master/bintrayv1.gradle'
 }

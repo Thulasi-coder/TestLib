@@ -5,6 +5,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
 
     }
     dependencies {
@@ -12,6 +15,9 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
     }
 }
 
@@ -21,6 +27,19 @@ allprojects {
         jcenter()
 
     }
+}
+
+//WORKAROUND FOR
+// Javadoc generation failed. Generated Javadoc options file (useful for troubleshooting): 'D:\ThulasiRajan\AndroidApplications\TestLib\app\buil
+//d\tmp\javadoc\javadoc.options'
+//while running 'gradlew install' in cmd or terminal
+subprojects {
+    tasks.withType(Javadoc).all { enabled = false }
+//    tasks.withType(Javadoc) {
+//        options.addStringOption('Xdoclint:none', '-quiet')
+//        options.addStringOption('encoding', 'UTF-8')
+//        options.addStringOption('charSet', 'UTF-8')
+//    }
 }
 
 task clean(type: Delete) {
